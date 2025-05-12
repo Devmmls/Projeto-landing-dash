@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LandingPage</title>
-    <link rel="stylesheet" href="landing.css" />
+    <link rel="stylesheet" href="test.css" />
   </head>
   <body>
     <header class="cabecalho-principal">
@@ -12,7 +12,7 @@
         <h2>Educação Brasil</h2>
         <nav class="navegacao-principal">
           <a href="#" class="link-navegacao">Início</a>
-          <button>DashBoard</button>
+          <button id="botao-dash-acesso">DashBoard</button>
         </nav>
       </div>
 
@@ -26,7 +26,7 @@
           </p>
 
           <div class="botoes-principal">
-            <button class="botao-primario">
+            <button id="btn-dash-inicial" class="botao-primario">
               Acessar Dashboard
               <img src="./images/Arrow right.png" alt="seta de ação" />
             </button>
@@ -57,42 +57,54 @@
 
     <section class="secao-sobre-projeto">
       <div class="conteudo-sobre-projeto">
-        <h3 class="titulo-sobre-projeto">Sobre o Projeto</h3>
-        <div class="descricao-sobre-projeto">
-          <p>
-            O projeto "Educação Brasil" foi desenvolvido para trazer
-            transparência e visibilidade aos indicadores educacionais do país,
-            permitindo uma análise clara sobre evasão escolar, desempenho
-            acadêmico e infraestrutura das escolas públicas.
-          </p>
-          <p>
-            Nossa plataforma reúne dados de fontes oficiais e os apresenta de
-            forma visual e interativa, evidenciando as desigualdades regionais e
-            os desafios enfrentados por estudantes e educadores em diferentes
-            regiões do Brasil.
-          </p>
+        <div>
+          <h3>Sobre o Projeto</h3>
+          <div class="descricao-sobre-projeto">
+            <p>
+              O projeto "Educação Brasil" foi desenvolvido para trazer
+              transparência e visibilidade aos indicadores educacionais do país,
+              permitindo uma análise clara sobre evasão escolar, desempenho
+              acadêmico e infraestrutura das escolas públicas.
+            </p>
+            <p>
+              Nossa plataforma reúne dados de fontes oficiais e os apresenta de
+              forma visual e interativa, evidenciando as desigualdades regionais
+              e os desafios enfrentados por estudantes e educadores em
+              diferentes regiões do Brasil.
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="funcionalidades-sobre-projeto">
-        <div class="cartao-funcionalidade">
-          <img src="./images/dado.png" alt="Ícone de dados" />
-          <h3>Dados Transparentes</h3>
-          <p>Informações claras e atualizadas sobre a educação no Brasil</p>
-        </div>
-        <div class="cartao-funcionalidade">
-          <img src="./images/dado.png" alt="Ícone de análise regional" />
-          <h3>Análise regional</h3>
-          <p>Comparação de indicadores entre as regiões brasileiras</p>
-        </div>
-        <div class="cartao-funcionalidade">
-          <img src="./images/dado.png" alt="Ícone de evolução temporal" />
-          <h3>Evolução temporal</h3>
-          <p>Acompanhe a evolução dos indicadores ao longo dos anos</p>
-        </div>
-        <div class="cartao-funcionalidade">
-          <img src="./images/dado.png" alt="Ícone de visualização interativa" />
-          <h3>Visualização interativa</h3>
-          <p>Painel interativo e fácil de navegar</p>
+        <div class="funcionalidades-sobre-projeto">
+          <div class="cartao-funcionalidade">
+            <img src="./images/dado.png" alt="Ícone de dados" />
+            <div class="cartao-informacao">
+              <h3>Dados Transparentes</h3>
+              <p>Informações claras e atualizadas sobre a educação no Brasil</p>
+            </div>
+          </div>
+          <div class="cartao-funcionalidade">
+            <img src="./images/dado.png" alt="Ícone de análise regional" />
+            <div class="cartao-informacao">
+              <h3>Análise regional</h3>
+              <p>Comparação de indicadores entre as regiões brasileiras</p>
+            </div>
+          </div>
+          <div class="cartao-funcionalidade">
+            <img src="./images/dado.png" alt="Ícone de evolução temporal" />
+            <div class="cartao-informacao">
+              <h3>Evolução temporal</h3>
+              <p>Acompanhe a evolução dos indicadores ao longo dos anos</p>
+            </div>
+          </div>
+          <div class="cartao-funcionalidade">
+            <img
+              src="./images/dado.png"
+              alt="Ícone de visualização interativa" />
+            <div class="cartao-informacao">
+              <h3>Visualização interativa</h3>
+              <p>Painel interativo e fácil de navegar</p>
+            </div>
+          </div>
         </div>
       </div>
       <img
@@ -110,7 +122,9 @@
         sobre a educação básica do Brasil, com dados sobre evasão escolar, IDEB,
         infraestrutura e acesso à tecnologia nas escolas.
       </p>
-      <button class="botao primario botao-acao">Acessar Dashboard</button>
+      <button id="btn-dash" class="botao primario botao-acao">
+        Acessar Dashboard
+      </button>
     </section>
 
     <footer class="rodape-principal">
@@ -145,5 +159,6 @@
         </div>
       </div>
     </footer>
+    <script src="./scripts/landing.js"></script>
   </body>
 </html>
