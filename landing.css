@@ -1,6 +1,4 @@
-/* Global */
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 :root {
   --cor-cinza: #d9d9d9;
@@ -16,20 +14,19 @@
   --cor-azul-claro: #5fa8d3;
   --cor-azul-marinho: #62b6cb;
   --cor-azul-forte: #1b4965;
-
-  --border: 0.1rem solid rgb(255, 255, 255, 0.3);
+  --border: 0.1rem solid rgb(255, 255, 255);
 }
 
+/* ==================================================
+   Estilos Gerais
+   ================================================== */
+
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  outline: none;
-  border: none;
   text-decoration: none;
-  text-transform: capitalize;
-  transition: 0.2s linear;
 }
 
 html {
@@ -39,23 +36,362 @@ html {
   scroll-behavior: smooth;
 }
 
-html::-webkit-scrollbar {
-  width: 0.8rem;
-}
-
-html::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-html::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  border-radius: 5rem;
-}
-
 body {
-  background-color: var(--bg);
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--cor-clara);
+  color: var(--cor-preto);
+  line-height: 1.6;
+  max-width: 1440px;
 }
 
-section {
-  padding: 2rem 7%;
+.botao {
+  display: inline-block;
+  padding: 12px 24px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.primario {
+  background-color: var(--cor-verde);
+  color: var(--cor-branco);
+}
+
+.primario:hover {
+  background-color: #8fbc8f;
+}
+
+.secundario {
+  background-color: var(--cor-laranja);
+  color: var(--cor-branco);
+}
+
+.secundario:hover {
+  background-color: #ff8c00;
+}
+
+/* ==================================================
+   Estilos do Cabeçalho Principal
+   ================================================== */
+.cabecalho-principal {
+  background-color: var(--cor-azul-forte);
+  color: var(--cor-branco);
+  padding: 20px 20px;
+
+  & .container {
+    display: flex;
+    margin: 0 auto;
+    gap: 3.5rem;
+  }
+
+  & .container-navegacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  & h2 {
+    font-size: 3.2rem;
+    margin: 0;
+    font-weight: bold;
+    font-weight: 600;
+  }
+
+  & .navegacao-principal {
+    display: flex;
+    align-items: center;
+    gap: 2.6rem;
+
+    & a {
+      color: var(--cor-branco);
+      font-size: 2.4rem;
+      font-weight: 400;
+    }
+    & button {
+      background-color: var(--cor-verde);
+      color: var(--cor-azul-forte);
+
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 2.4rem;
+      margin-left: 20px;
+    }
+  }
+}
+/* ==================================================
+   Estilos da Seção Principal (Hero)
+   ================================================== */
+.secao-principal {
+  padding: 60px 0;
+  text-align: left;
+  max-width: 55%;
+  gap: 2rem;
+
+  & h1 {
+    font-size: 6.4rem;
+    color: var(--cor-branco);
+    line-height: 7rem;
+    margin-bottom: 1rem;
+    max-width: 80%;
+  }
+  & p {
+    color: var(--cor-azul-claro);
+    font-size: 2.9rem;
+    line-height: 4.5rem;
+    max-width: 87%;
+  }
+
+  & .botoes-principal {
+    margin-right: 15px;
+    display: flex;
+    gap: 2rem;
+
+    & .botao-primario {
+      background-color: var(--cor-verde);
+      color: var(--cor-azul-forte);
+      display: inline-flex;
+      border: none;
+      padding: 12px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 3.2rem;
+      font-weight: 400;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    & .botao-secundario {
+      background-color: var(--cor-azul-forte);
+      color: var(--cor-branco);
+      border: var(--border);
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 3.2rem;
+      font-weight: 400;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+  }
+}
+
+/* ==================================================
+   Estilos da Seção de Destaques
+   ================================================== */
+.secao-destaques {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px 40px;
+  background-color: rgb(95, 168, 211, 0.38);
+  border-radius: 12px;
+  max-width: 50%;
+  align-self: flex-end;
+  margin-bottom: 7rem;
+
+  & .cartao-destaque {
+    background-color: var(--cor-azul-claro);
+    color: var(--cor-branco);
+    padding: 25px 25px;
+    margin: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(247, 246, 246, 0);
+    border: var(--border);
+    width: 22rem;
+
+    & p {
+      font-size: 2rem;
+      color: var(--cor-branco);
+      font-weight: 400;
+      line-height: 2.5rem;
+      text-align: left;
+    }
+
+    & h3 {
+      font-size: 2.9rem;
+      font-weight: 600;
+      text-align: left;
+    }
+  }
+}
+
+/* ==================================================
+   Estilos da Seção Sobre o Projeto
+   ================================================== */
+.secao-sobre-projeto {
+  padding: 60px 0;
+  background-color: var(--cor-clara);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.conteudo-sobre-projeto {
+  /* max-width: 50rem; */
+  padding: 20px;
+}
+
+.titulo-sobre-projeto {
+  font-size: 2.2rem;
+  color: var(--cor-azul-marinho);
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.descricao-sobre-projeto p {
+  line-height: 1.7;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.funcionalidades-sobre-projeto {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 50rem;
+  padding: 20px;
+}
+
+.cartao-funcionalidade {
+  text-align: center;
+  margin: 20px;
+  width: 160px;
+}
+
+.cartao-funcionalidade img {
+  max-width: 7rem;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.cartao-funcionalidade h3 {
+  font-size: 1.1rem;
+  color: var(--cor-azul-marinho);
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.cartao-funcionalidade p {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0;
+}
+
+.imagem-sobre-projeto {
+  /* max-width: 45rem; */
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================================================
+   Estilos da Seção de Ação (Call to Action)
+   ================================================== */
+.secao-acao {
+  background-color: var(--cor-verde);
+  color: var(--cor-branco);
+  padding: 50px 0;
+  text-align: center;
+}
+
+.secao-acao h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.secao-acao span {
+  color: #f0f8f7;
+}
+
+.secao-acao p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.botao-acao {
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  font-weight: bold;
+}
+
+/* ==================================================
+   Estilos do Rodapé Principal
+   ================================================== */
+.rodape-principal {
+  background-color: var(--cor-azul-forte);
+  color: var(--cor-clara);
+  padding: 30px 0;
+}
+
+.conteudo-rodape {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.marca-rodape h3 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.copyright-rodape {
+  font-size: 0.9rem;
+  color: var(--cor-cinza-escuro);
+  margin-bottom: 0;
+}
+
+.links-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.coluna-links-rodape {
+  margin: 0 20px;
+}
+
+.titulo-links-rodape {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.lista-links-rodape {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-lista-links-rodape {
+  margin-bottom: 8px;
+}
+
+.link-rodape {
+  color: var(--cor-azul-claro);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.link-rodape:hover {
+  color: var(--cor-branco);
 }

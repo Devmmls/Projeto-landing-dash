@@ -4,54 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LandingPage</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="landing.css" />
   </head>
   <body>
-    <header class="header">
-      <h2 class="logo">Educação Brasil</h2>
-
-      <nav class="navbar">
-        <a href="#">Início</a> <button>Dashboard</button>
-      </nav>
-
-      <div>
-        <h1>Educação Básica no Brasil: Desafios e Indicadores</h1>
-        <p>
-          Explore os principais indicadores educacionais do Brasil e entenda os
-          desafios regionais para melhorar o acesso e a qualidade da educação
-          básica no país.
-        </p>
-
-        <div>
-          <button>Acessar Dashboard</button>
-          <button>Saiba mais</button>
-        </div>
+    <header class="cabecalho-principal">
+      <div class="container-navegacao">
+        <h2>Educação Brasil</h2>
+        <nav class="navegacao-principal">
+          <a href="#" class="link-navegacao">Início</a>
+          <button>DashBoard</button>
+        </nav>
       </div>
 
-      <div>
-        <div>
-          <h3>17,8%</h3>
-          <p>Taxa de evasão escolar na região Norte</p>
+      <div class="container">
+        <div class="secao-principal">
+          <h1>Educação Básica no Brasil: Desafios e Indicadores</h1>
+          <p>
+            Explore os principais indicadores educacionais do Brasil e entenda
+            os desafios regionais para melhorar o acesso e a qualidade da
+            educação básica no país.
+          </p>
+
+          <div class="botoes-principal">
+            <button class="botao-primario">
+              Acessar Dashboard
+              <img src="./images/Arrow right.png" alt="seta de ação" />
+            </button>
+            <button class="botao-secundario">Saiba mais</button>
+          </div>
         </div>
-        <div>
-          <h3>62,4%</h3>
-          <p>Escola com acesso à Internet na região Norte</p>
-        </div>
-        <div>
-          <h3>6.4</h3>
-          <p>Nota do IDEB na região Sul</p>
-        </div>
-        <div>
-          <h3>35,41%</h3>
-          <p>Escolas com biblioteca na região Norte</p>
+
+        <div class="secao-destaques">
+          <div class="cartao-destaque">
+            <h3>17,8%</h3>
+            <p>Taxa de evasão escolar na região Norte</p>
+          </div>
+          <div class="cartao-destaque">
+            <h3>62,4%</h3>
+            <p>Escola com acesso à Internet na região Norte</p>
+          </div>
+          <div class="cartao-destaque">
+            <h3>6.4</h3>
+            <p>Nota do IDEB na região Sul</p>
+          </div>
+          <div class="cartao-destaque">
+            <h3>35,41%</h3>
+            <p>Escolas com biblioteca na região Norte</p>
+          </div>
         </div>
       </div>
     </header>
 
-    <section class="home">
-      <div>
-        <h3>Sobre o Projeto</h3>
-        <div>
+    <section class="secao-sobre-projeto">
+      <div class="conteudo-sobre-projeto">
+        <h3 class="titulo-sobre-projeto">Sobre o Projeto</h3>
+        <div class="descricao-sobre-projeto">
           <p>
             O projeto "Educação Brasil" foi desenvolvido para trazer
             transparência e visibilidade aos indicadores educacionais do país,
@@ -66,62 +73,73 @@
           </p>
         </div>
       </div>
-      <div>
-        <div>
+      <div class="funcionalidades-sobre-projeto">
+        <div class="cartao-funcionalidade">
           <img src="./images/dado.png" alt="Ícone de dados" />
           <h3>Dados Transparentes</h3>
           <p>Informações claras e atualizadas sobre a educação no Brasil</p>
         </div>
-        <div>
+        <div class="cartao-funcionalidade">
           <img src="./images/dado.png" alt="Ícone de análise regional" />
           <h3>Análise regional</h3>
           <p>Comparação de indicadores entre as regiões brasileiras</p>
         </div>
-        <div>
+        <div class="cartao-funcionalidade">
           <img src="./images/dado.png" alt="Ícone de evolução temporal" />
           <h3>Evolução temporal</h3>
           <p>Acompanhe a evolução dos indicadores ao longo dos anos</p>
         </div>
-        <div>
+        <div class="cartao-funcionalidade">
           <img src="./images/dado.png" alt="Ícone de visualização interativa" />
           <h3>Visualização interativa</h3>
-          <p>Dashboard interativo e fácil de navegar</p>
+          <p>Painel interativo e fácil de navegar</p>
         </div>
       </div>
-      <img src="./images/crianças.png" alt="Ilustração de crianças estudando" />
+      <img
+        src="./images/crianças.png"
+        alt="Ilustração de crianças estudando"
+        class="imagem-sobre-projeto" />
     </section>
 
-    <section class="about">
+    <section class="secao-acao">
       <h2>
         <span>Explore os Dados Educacionais</span>
       </h2>
-      <p>
+      <p class="descricao-acao">
         Acesse nosso dashboard interativo e descubra informações detalhadas
         sobre a educação básica do Brasil, com dados sobre evasão escolar, IDEB,
         infraestrutura e acesso à tecnologia nas escolas.
       </p>
-      <button>Acessar Dashboard</button>
+      <button class="botao primario botao-acao">Acessar Dashboard</button>
     </section>
 
-    <footer class="footer">
-      <div>
-        <div>
-          <h3>Educação Brasil</h3>
+    <footer class="rodape-principal">
+      <div class="conteudo-rodape">
+        <div class="marca-rodape">
+          <h3 class="logo-rodape">Educação Brasil</h3>
           <p>2025 Educação Brasil. Todos os direitos reservados.</p>
         </div>
 
-        <div>
-          <div>
-            <h3>Links</h3>
-            <ul>
-              <li><a href="#">Início</a></li>
-              <li><a href="#">Dashboard</a></li>
+        <div class="links-rodape">
+          <div class="coluna-links-rodape">
+            <h3 class="titulo-links-rodape">Links</h3>
+            <ul class="lista-links-rodape">
+              <li class="item-lista-links-rodape">
+                <a href="#" class="link-rodape">Início</a>
+              </li>
+              <li class="item-lista-links-rodape">
+                <a href="#" class="link-rodape">Dashboard</a>
+              </li>
             </ul>
           </div>
-          <div>
-            <h3>Contato</h3>
-            <ul>
-              <li><a href="mailto:email@gmail.com">email@gmail.com</a></li>
+          <div class="coluna-links-rodape">
+            <h3 class="titulo-links-rodape">Contato</h3>
+            <ul class="lista-links-rodape">
+              <li class="item-lista-links-rodape">
+                <a href="mailto:email@gmail.com" class="link-rodape"
+                  >email@gmail.com</a
+                >
+              </li>
             </ul>
           </div>
         </div>
