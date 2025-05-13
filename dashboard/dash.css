@@ -126,7 +126,7 @@ body {
 .secao-principal {
   padding: 60px 0;
   text-align: left;
-  max-width: 55%;
+  max-width: 100%;
   gap: 2rem;
 
   & h1 {
