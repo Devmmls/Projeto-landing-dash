@@ -43,7 +43,6 @@ body {
   background-color: var(--cor-clara);
   color: var(--cor-preto);
   line-height: 1.6;
-  max-width: 1440px;
 }
 
 .botao {
@@ -60,6 +59,7 @@ body {
 
 .primario:hover {
   background-color: var(--cor-verde);
+  transition: 1s;
 }
 
 /* ==================================================
@@ -98,6 +98,10 @@ body {
       color: var(--cor-branco);
       font-size: 2.4rem;
       font-weight: 400;
+      &:hover {
+        color: var(--cor-laranja);
+        transition: 0.5s;
+      }
     }
     & button {
       background-color: var(--cor-verde);
@@ -111,6 +115,7 @@ body {
 
       &:hover {
         background-color: var(--cor-laranja);
+        transition: 0.5s;
       }
     }
   }
@@ -159,6 +164,7 @@ body {
 
       &:hover {
         background-color: rgb(255, 119, 0, 0.8);
+        transition: 1s;
       }
     }
     & .botao-secundario {
@@ -175,6 +181,7 @@ body {
       margin-top: 2rem;
       &:hover {
         background-color: var(--cor-laranja);
+        transition: 1s;
       }
     }
   }
@@ -203,6 +210,11 @@ body {
     box-shadow: 0 4px 8px rgba(247, 246, 246, 0);
     border: var(--border);
     width: 22rem;
+
+    &:hover {
+      background-color: rgb(255, 119, 0, 0.8);
+      transition: 1s;
+    }
 
     & p {
       font-size: 2rem;
@@ -349,23 +361,26 @@ body {
   background-color: var(--cor-azul-forte);
   color: var(--cor-clara);
   padding: 30px 0;
-}
 
-.conteudo-rodape {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 20px;
-}
+  & .conteudo-rodape {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
 
-.marca-rodape h3 {
-  font-size: 1.1rem;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-weight: bold;
+    & .marca-rodape h3 {
+      font-size: 3.2rem;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    & .marca-rodape p {
+      font-size: 2rem;
+      color: var(--cor-azul-claro);
+    }
+  }
 }
 
 .copyright-rodape {
@@ -385,7 +400,7 @@ body {
 }
 
 .titulo-links-rodape {
-  font-size: 1.1rem;
+  font-size: 3.2rem;
   margin-top: 0;
   margin-bottom: 15px;
   font-weight: bold;
@@ -404,9 +419,10 @@ body {
 .link-rodape {
   color: var(--cor-azul-claro);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 2rem;
 }
 
 .link-rodape:hover {
-  color: var(--cor-branco);
+  color: var(--cor-laranja);
+  transition: 0.5s;
 }
