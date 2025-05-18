@@ -31,27 +31,47 @@
             <label for="ano">Ano</label><br />
             <select id="ano">
               <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
             </select>
           </div>
+
           <div class="filtro">
             <label for="regiao">Região</label><br />
             <select id="regiao">
-              <option value="nenhum">Nenhum</option>
+             <option value="norte">Norte</option>
+             <option value="nordeste">Nordeste</option>
+             <option value="sudeste">Sudeste</option>
+             <option value="sul">Sul</option>
+             <option value="centro-oeste">Centro-Oeste</option>
             </select>
+           </select>
           </div>
+          
           <div class="filtro">
-            <label for="estado">Estado</label><br />
-            <select id="estado">
-              <option value="nenhum">Nenhum</option>
-            </select>
+          <label for="estado">Estado:</label>
+          <select id="estado">
+           <option value="21">Maranhão</option>
+           <option value="23">Ceará</option>
+           <option value="15">Pará</option>
+           </select>
           </div>
+
           <div class="filtro">
-            <label for="cidade">Cidade</label><br />
-            <select id="cidade">
-              <option value="nenhum">Nenhum</option>
-            </select>
+           <label for="cidade">Cidade:</label>
+           <select id="cidade">
+            <option value="0">Nenhuma</option>
+            <option value="2111300">São Luís</option>
+            <option value="2304400">Fortaleza</option>
+            <option value="1501402">Belém</option>
+           </select>
           </div>
         </div>
+      <!-- Área onde o IDEB será exibido -->
+      <div id="resultado-ideb" style="margin-top: 20px; font-size: 2rem; font-weight: bold;">
+      Selecione os filtros para visualizar o IDEB
+      /div>
+ 
 
         <h3 class="detalhes-gerais-titulo">Detalhes Gerais (Brasil)</h3>
         <div class="indicadores-grid">
@@ -140,9 +160,12 @@
                 >
               </li>
             </ul>
-          </div>
+          </div>class="indicador">
+           <span class="indicador-valor valor-azul">–</span>
+           <p class="indicador-descricao">Nota IDEB 2021</p>
         </div>
       </div>
     </footer>
+    <script src="./dashboard.js"></script>
   </body>
 </html>
