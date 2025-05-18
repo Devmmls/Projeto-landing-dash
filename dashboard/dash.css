@@ -488,3 +488,47 @@ body {
     font-size: 1.6rem;
   }
 }
+
+@media (max-width: 900px) {
+  .indicadores-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .graficos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container-navegacao {
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+/* Celulares e telas pequenas */
+@media (max-width: 600px) {
+  .indicadores-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filtros-container {
+    flex-direction: column;
+  }
+
+  .container-navegacao {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .secao-principal h1 {
+    font-size: 1.5rem;
+  }
+
+  .navegacao-principal {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .graficos-grid {
+    grid-template-columns: 1fr;
+  }
+}
