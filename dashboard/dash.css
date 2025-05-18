@@ -310,11 +310,15 @@ body {
   margin-bottom: 0;
 }
 
+
 .graficos-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
 }
+
 
 /* .grafico-container {
    Estilos para o container do gráfico, se necessário 
@@ -433,4 +437,54 @@ body {
 .link-rodape:hover {
   color: var(--cor-laranja);
   transition: 0.5s;
+}
+
+/* === Estilo para a seção de gráficos === */
+
+
+.graficos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
+
+.grafico-container {
+  background-color: var(--cor-branco);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.grafico-titulo {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--cor-azul-forte);
+}
+
+.grafico-imagem {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+
+@media (max-width: 768px) {
+  .secao-principal h1 {
+    font-size: 3.6rem;
+    line-height: 4.2rem;
+  }
+
+  .secao-principal p {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+  }
+
+  .navegacao-principal a,
+  .navegacao-principal button {
+    font-size: 1.6rem;
+  }
 }
