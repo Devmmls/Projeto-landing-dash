@@ -2,39 +2,77 @@
   const anoSelect = document.getElementById("ano");
   const estadoSelect = document.getElementById("estado");
   const cidadeSelect = document.getElementById("cidade");
-  const idebSpan = document.getElementById("ideb-valor");
-  const mensagemStatus = document.getElementById("mensagem-status");
+  const idebSpan = document.getElementById("ideb-valor"); // Se você tiver essa seção ainda
+  const idebBrasilSpan = document.getElementById("ideb-brasil");
+  const descricaoIdeb = document.getElementById("descricao-ideb");
 
   async function buscarIdeb() {
     const ano = anoSelect.value;
-    let id = cidadeSelect.value !== "0" ? cidadeSelect.value : estadoSelect.value;
+    const cidade = cidadeSelect.value;
+    const estado = estadoSelect.value;
 
-    const url = https://api.qedu.org.br/v1/ideb?id=${id}&ano=${ano};
-    mensagemStatus.textContent = "Carregando IDEB...";
+    // Usa cidade se selecionada, senão estado
+    const id = cidade !== "0" ? cidade : estado;
+
+    const url = `https://api.qedu.org.br/v1/ideb?id=${id}&ano=${ano}`;
 
     try {
       const resposta = await fetch(url);
-      if (!resposta.ok) throw new Error("Erro na resposta da API");
+
+      if (!resposta.ok) {
+        throw new Error("Erro na resposta da API");
+      }
 
       const dados = await resposta.json();
 
       if (dados && dados.length > 0 && dados[0].nota_geral) {
-        idebSpan.textContent = dados[0].nota_geral;
-        mensagemStatus.textContent = Dados carregados para o ano ${ano};
+        if (idebSpan) idebSpan.textContent = dados[0].nota_geral;
+        console.log(`IDEB do local selecionado (${id}) para ${ano}:`, dados[0].nota_geral);
       } else {
-        idebSpan.textContent = "--";
-        mensagemStatus.textContent = "Dados não encontrados para os filtros selecionados.";
+        if (idebSpan) idebSpan.textContent = "--";
+        console.warn("Dados não encontrados para o filtro selecionado.");
       }
+
     } catch (erro) {
-      idebSpan.textContent = "--";
-      mensagemStatus.textContent = "Erro ao carregar dados. Tente novamente mais tarde.";
+      if (idebSpan) idebSpan.textContent = "--";
       console.error("Erro ao buscar dados IDEB:", erro);
     }
   }
 
-  anoSelect.addEventListener("change", buscarIdeb);
+  async function buscarIdebBrasil(ano) {
+    const url = `https://api.qedu.org.br/v1/ideb?id=brasil&ano=${ano}`;
+
+    try {
+      const resposta = await fetch(url);
+      if (!resposta.ok) throw new Error("Erro ao buscar IDEB do Brasil");
+
+      const dados = await resposta.json();
+      if (dados && dados.length > 0 && dados[0].nota_geral) {
+        idebBrasilSpan.textContent = dados[0].nota_geral;
+        descricaoIdeb.textContent = `Nota IDEB Brasil ${ano}`;
+      } else {
+        idebBrasilSpan.textContent = "--";
+        descricaoIdeb.textContent = "IDEB Brasil não disponível";
+      }
+    } catch (erro) {
+      idebBrasilSpan.textContent = "--";
+      descricaoIdeb.textContent = "Erro ao buscar IDEB Brasil";
+      console.error("Erro ao buscar IDEB Brasil:", erro);
+    }
+  }
+
+  // Eventos
+  anoSelect.addEventListener("change", () => {
+    buscarIdeb();
+    buscarIdebBrasil(anoSelect.value);
+  });
+
   estadoSelect.addEventListener("change", buscarIdeb);
   cidadeSelect.addEventListener("change", buscarIdeb);
 
-  buscarIdeb(); // busca inicial
+  // Carregamento inicial
+  buscarIdeb();
+  buscarIdebBrasil(anoSelect.value);
 });
+
+
