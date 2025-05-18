@@ -126,7 +126,7 @@ body {
 .secao-principal {
   padding: 60px 0;
   text-align: left;
-  max-width: 55%;
+  max-width: 100%;
   gap: 2rem;
 
   & h1 {
@@ -134,13 +134,13 @@ body {
     color: var(--cor-branco);
     line-height: 7rem;
     margin-bottom: 1rem;
-    max-width: 80%;
+    max-width: 100%;
   }
   & p {
     color: var(--cor-azul-claro);
-    font-size: 2.9rem;
+    font-size: 2.3rem;
     line-height: 4.5rem;
-    max-width: 87%;
+    max-width: 100%;
   }
 
   & .botoes-principal {
@@ -188,51 +188,6 @@ body {
 }
 
 /* ==================================================
-   Estilos da Seção de Destaques
-   ================================================== */
-.secao-destaques {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 20px 40px;
-  background-color: rgb(95, 168, 211, 0.38);
-  border-radius: 12px;
-  max-width: 50%;
-  align-self: flex-end;
-  margin-bottom: 7rem;
-
-  & .cartao-destaque {
-    background-color: var(--cor-azul-claro);
-    color: var(--cor-branco);
-    padding: 25px 25px;
-    margin: 15px 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(247, 246, 246, 0);
-    border: var(--border);
-    width: 22rem;
-
-    &:hover {
-      background-color: rgb(255, 119, 0, 0.8);
-      transition: 1s;
-    }
-
-    & p {
-      font-size: 2rem;
-      color: var(--cor-branco);
-      font-weight: 400;
-      line-height: 2.5rem;
-      text-align: left;
-    }
-
-    & h3 {
-      font-size: 2.9rem;
-      font-weight: 600;
-      text-align: left;
-    }
-  }
-}
-
-/* ==================================================
    Estilos da Seção Sobre o Projeto
    ================================================== */
 .secao-sobre-projeto {
@@ -242,10 +197,6 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-
-  & .conteudo-sobre-projeto {
-    max-width: 50%;
-  }
 
   & h3 {
     color: var(--cor-azul-forte);
@@ -263,95 +214,156 @@ body {
     text-align: left;
   }
 
-  & .funcionalidades-sobre-projeto {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 50rem;
-    padding: 20px;
+  & .cartao-funcionalidade {
+    text-align: center;
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
 
-    & .cartao-funcionalidade {
-      text-align: center;
-      margin: 20px;
-      width: 100%;
-      display: flex;
+    & .cartao-informacao {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    & h3 {
+      font-size: 3rem;
+      color: var(--cor-preto);
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-weight: bold;
+      line-height: 35px;
+      text-align: left;
+    }
+
+    & img {
+      max-width: 5rem;
+      height: auto;
+      background-color: rgb(27, 73, 101, 0.85);
+      margin-bottom: 10px;
+      border-radius: 100%;
+      padding: 1rem;
+      margin-right: 10px;
       align-self: flex-start;
-
-      & .cartao-informacao {
-        flex-direction: column;
-        gap: 2rem;
-      }
-      & h3 {
-        font-size: 3rem;
-        color: var(--cor-preto);
-        margin-top: 10px;
-        margin-bottom: 5px;
-        font-weight: bold;
-        line-height: 35px;
-        text-align: left;
-      }
-
-      & img {
-        max-width: 5rem;
-        height: auto;
-        background-color: rgb(27, 73, 101, 0.85);
-        margin-bottom: 10px;
-        border-radius: 100%;
-        padding: 1rem;
-        margin-right: 10px;
-        align-self: flex-start;
-      }
-      & p {
-        font-size: 2rem;
-        color: var(--cor-preto);
-        line-height: 30px;
-        font-weight: 200;
-        margin-bottom: 0;
-      }
+    }
+    & p {
+      font-size: 2rem;
+      color: var(--cor-preto);
+      line-height: 30px;
+      font-weight: 200;
+      margin-bottom: 0;
     }
   }
-  & .imagem-sobre-projeto {
-    max-width: 60rem;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
 }
-
-/* ==================================================
-   Estilos da Seção de Ação (Call to Action)
-   ================================================== */
-.secao-acao {
-  background-color: var(--cor-cinza);
-  padding: 50px 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-
-  & h2 span {
-    color: var(--cor-azul-forte);
-    font-size: 3.4rem;
-    font-weight: 800;
-    margin-bottom: 30px;
-  }
-  & p {
-    font-size: 2.6rem;
-    line-height: 30px;
-    margin-bottom: 30px;
-    font-weight: 300;
-    max-width: 82%;
-    align-self: center;
-  }
-}
-
-.botao-acao {
-  background-color: var(--cor-azul-forte);
-  font-size: 3.2rem;
-  padding: 15px 30px;
-  font-weight: 400;
-  max-width: 45rem;
-  align-self: center;
+& .imagem-sobre-projeto {
+  max-width: 60rem;
+  height: auto;
   border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detalhes-gerais-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.detalhes-gerais-titulo {
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.indicadores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.indicador {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.indicador-valor {
+  font-size: 1.2em;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.valor-azul {
+  color: #007bff;
+}
+
+.valor-vermelho {
+  color: #dc3545;
+}
+
+.valor-verde {
+  color: #28a745;
+}
+
+.indicador-descricao {
+  font-size: 0.9em;
+  color: #6c757d;
+  margin-bottom: 0;
+}
+
+
+.graficos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
+
+/* .grafico-container {
+   Estilos para o container do gráfico, se necessário 
+} */
+
+.grafico-titulo {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.grafico-imagem {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.fonte-dados {
+  font-size: 0.8em;
+  color: #6c757d;
+  margin-top: 20px;
+}
+
+.filtros-container {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filtro label {
+  display: block;
+  font-size: 0.9em;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.filtro select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+  color: #555;
 }
 
 /* ==================================================
@@ -427,43 +439,52 @@ body {
   transition: 0.5s;
 }
 
-/* =========================================
-   Responsividade para dispositivos móveis
-   ========================================= */
+/* === Estilo para a seção de gráficos === */
+
+
+.graficos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  justify-items: center;
+}
+
+
+.grafico-container {
+  background-color: var(--cor-branco);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.grafico-titulo {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--cor-azul-forte);
+}
+
+.grafico-imagem {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+
 @media (max-width: 768px) {
-  .container-navegacao {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  nav.navegacao-principal {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .secao-principal {
-    text-align: center;
-    padding: 2rem;
-  }
-
   .secao-principal h1 {
-    font-size: 2.4rem;
+    font-size: 3.6rem;
+    line-height: 4.2rem;
   }
 
   .secao-principal p {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+  }
+
+  .navegacao-principal a,
+  .navegacao-principal button {
     font-size: 1.6rem;
-  }
-
-  .botoes-principal {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
   }
 }
