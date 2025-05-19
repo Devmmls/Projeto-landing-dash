@@ -431,6 +431,13 @@ body {
    Responsividade para dispositivos móveis
    ========================================= */
 @media (max-width: 768px) {
+
+  .cabecalho-principal .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
   .container-navegacao {
     flex-direction: column;
     align-items: center;
@@ -444,16 +451,21 @@ body {
   }
 
   .secao-principal {
+    max-width: 100%;
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 1rem;
   }
 
   .secao-principal h1 {
     font-size: 2.4rem;
+    line-height: 4.2rem;
+    max-width: 100%;
   }
 
   .secao-principal p {
     font-size: 1.6rem;
+    line-height: 2.5rem;
+    max-width: 100%;
   }
 
   .botoes-principal {
@@ -466,4 +478,187 @@ body {
     max-width: 100%;
     height: auto;
   }
+
+  .secao-destaques {
+    max-width: 90%;
+    grid-template-columns: 1fr; 
+    padding: 20px 10px;
+    margin-bottom: 3rem;
+  }
+
+  .secao-destaques .cartao-destaque {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .secao-sobre-projeto {
+    flex-direction: column;
+    padding: 30px 1rem;
+  }
+
+  .conteudo-sobre-projeto,
+  .funcionalidades-sobre-projeto {
+    max-width: 100%;
+  }
+
+  .funcionalidades-sobre-projeto {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 1rem;
+  }
+
+  .imagem-sobre-projeto {
+    max-width: 100%;
+    margin-top: 2rem;
+  }
+
+  .secao-acao {
+    padding: 30px 1rem;
+  }
+
+  .secao-acao h2 span {
+    font-size: 2.4rem;
+  }
+
+  .secao-acao p {
+    font-size: 1.8rem;
+    max-width: 100%;
+  }
+
+  .botao-acao {
+    font-size: 2rem;
+    padding: 12px 20px;
+    max-width: 100%;
+  }
+
+  .rodape-principal .conteudo-rodape {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 10px;
+  }
+
+  .marca-rodape h3 {
+    font-size: 2rem;
+  }
+
+  .marca-rodape p {
+    font-size: 1.4rem;
+  }
+
+  .titulo-links-rodape {
+    font-size: 2rem;
+  }
+
+  .link-rodape {
+    font-size: 1.6rem;
+  }
 }
+
+/* Responsividade para celulares pequenos (até 480px) */
+@media (max-width: 480px) {
+  html {
+    font-size: 50%; 
+  }
+
+  .cabecalho-principal .container {
+    padding: 0 1rem;
+  }
+
+  .secao-principal h1 {
+    font-size: 2.8rem;
+    line-height: 3.2rem;
+  }
+
+  .secao-principal p {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+
+  .botao, 
+  .botao-primario,
+  .botao-secundario,
+  .botao-acao {
+    font-size: 1.6rem;
+    padding: 10px 15px;
+  }
+
+  .secao-destaques {
+    padding: 15px 5px;
+  }
+
+  .secao-sobre-projeto {
+    padding: 20px 1rem;
+  }
+
+  .funcionalidades-sobre-projeto {
+    gap: 1rem;
+  }
+
+  .imagem-sobre-projeto {
+    width: 100%;
+  }
+
+  .rodape-principal {
+    padding: 20px 1rem;
+  }
+
+  .marca-rodape h3 {
+    font-size: 1.8rem;
+  }
+
+  .marca-rodape p {
+    font-size: 1.2rem;
+  }
+
+  .titulo-links-rodape {
+    font-size: 1.6rem;
+  }
+
+  .link-rodape {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .secao-sobre-projeto {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+  .secao-sobre-projeto .conteudo-sobre-projeto {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .secao-sobre-projeto .funcionalidades-sobre-projeto {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .secao-sobre-projeto .cartao-funcionalidade {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .secao-sobre-projeto .cartao-funcionalidade img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .secao-sobre-projeto .imagem-sobre-projeto {
+    max-width: 100%;
+    margin-top: 20px;
+    align-self: center;
+  }
+}
+
+
+
