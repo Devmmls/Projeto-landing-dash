@@ -193,38 +193,15 @@ body {
 .secao-sobre-projeto {
   padding: 60px 0;
   background-color: var(--cor-branco);
-  display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-
-  & h3 {
-    color: var(--cor-azul-forte);
-    font-size: 3.4rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-  & p {
-    font-size: 2.6rem;
-    margin-bottom: 15px;
-    color: var(--cor-preto);
-    font-weight: 300;
-    line-height: 3rem;
-    max-width: 89%;
-    text-align: left;
-  }
+  max-width: 100%;
 
   & .cartao-funcionalidade {
     text-align: center;
     margin: 20px;
-    width: 100%;
-    display: flex;
-    align-self: flex-start;
 
-    & .cartao-informacao {
-      flex-direction: column;
-      gap: 2rem;
-    }
     & h3 {
       font-size: 3rem;
       color: var(--cor-preto);
@@ -262,14 +239,19 @@ body {
 }
 
 .detalhes-gerais-container {
-  border: 1px solid #ccc;
+  border: 1px solid var(--cor-cinza-escuro);
   padding: 20px;
   border-radius: 5px;
+  align-items: center;
+  max-width: 100%;
 }
 
 .detalhes-gerais-titulo {
-  color: #007bff;
-  margin-bottom: 15px;
+  color: var(--cor-azul-forte);
+  font-size: 1.7rem;
+  margin: 5rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .indicadores-grid {
@@ -278,22 +260,39 @@ body {
   gap: 10px;
   margin-bottom: 20px;
 }
+.indicadores-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 3fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
 .indicador {
-  background-color: #f8f9fa;
-  padding: 15px;
-  border-radius: 5px;
-  text-align: center;
+  text-align: left;
+  font-size: 1.5rem;
+  color: var(--cor-preto);
+  font-weight: 300;
+  line-height: 3rem;
+  text-align: left;
+  background-color: var(--cor-branco);
+  padding: 1rem 2.5rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.4rem 0.5rem rgba(0, 0, 0, 0.5);
+  margin-bottom: 1.5rem;
 }
 
 .indicador-valor {
-  font-size: 1.2em;
+  font-size: 1.7rem;
   display: block;
   margin-bottom: 5px;
 }
 
 .valor-azul {
   color: #007bff;
+}
+
+.valor-azul-forte {
+  color: var(--cor-azul);
 }
 
 .valor-vermelho {
@@ -303,13 +302,24 @@ body {
 .valor-verde {
   color: #28a745;
 }
+.valor-verde-fraco {
+  color: #84b990;
+}
+.valor-amarelo {
+  color: var(--cor-amarelo);
+}
+.valor-laranja {
+  color: var(--cor-laranja);
+}
+.valor-azul-claro {
+  color: var(--cor-azul-claro);
+}
 
 .indicador-descricao {
   font-size: 0.9em;
   color: #6c757d;
   margin-bottom: 0;
 }
-
 
 .graficos-grid {
   display: grid;
@@ -318,7 +328,6 @@ body {
   padding: 2rem;
   justify-items: center;
 }
-
 
 /* .grafico-container {
    Estilos para o container do gráfico, se necessário 
@@ -344,26 +353,38 @@ body {
 
 .filtros-container {
   display: flex;
-  /* justify-content: space-between; */
-  gap: 10px;
+  justify-content: space-between;
+  align-items: left;
+  font-size: 1.7rem;
+  gap: 1rem;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  border: 1px solid var(--cor-cinza-escuro);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filtro {
+  display: flex;
+  flex-direction: column;
 }
 
 .filtro label {
-  display: block;
-  font-size: 0.9em;
-  color: #333;
-  margin-bottom: 5px;
+  font-size: 1.7rem;
+  color: var(--cor-cinza-escuro);
+  text-align: left;
 }
 
+#ano {
+  padding: 3px 50px 0px 0px;
+}
 .filtro select {
-  padding: 8px;
-  border: 1px solid #ddd;
+  padding: 3px 250px 0px 0px;
+  max-width: 100%;
+  border: 1px solid var(--cor-cinza-escuro);
   border-radius: 4px;
-  font-size: 1em;
-  color: #555;
+  font-size: 1.2rem;
+  color: var(--cor-preto);
+  height: 25px;
 }
 
 /* ==================================================
@@ -441,7 +462,6 @@ body {
 
 /* === Estilo para a seção de gráficos === */
 
-
 .graficos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -449,7 +469,6 @@ body {
   padding: 2rem;
   justify-items: center;
 }
-
 
 .grafico-container {
   background-color: var(--cor-branco);
@@ -470,7 +489,6 @@ body {
   height: auto;
   border-radius: 0.5rem;
 }
-
 
 @media (max-width: 768px) {
   .secao-principal h1 {

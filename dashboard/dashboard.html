@@ -1,156 +1,170 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DashBoard</title>
-  <link rel="stylesheet" href="dash.css" />
-</head>
-<body>
-  <header class="cabecalho-principal">
-    <div class="container-navegacao">
-      <h2>Educação Brasil</h2>
-      <nav class="navegacao-principal">
-        <a href="#" class="link-navegacao">Início</a>
-        <button id="botao-dash-acesso">DashBoard</button>
-      </nav>
-    </div>
-
-    <div class="container">
-      <div class="secao-principal">
-        <h1>Dashboard Educacional</h1>
-        <p>Explore os principais indicadores da educação básica do Brasil</p>
-      </div>
-    </div>
-  </header>
-
-  <section class="secao-sobre-projeto">
-    <div class="detalhes-gerais-container">
-      <div class="filtros-container">
-        <div class="filtro">
-          <label for="ano">Ano</label><br />
-          <select id="ano">
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
-          </select>
-        </div>
-
-        <div class="filtro">
-          <label for="regiao">Região</label><br />
-          <select id="regiao">
-            <option value="norte">Norte</option>
-            <option value="nordeste">Nordeste</option>
-            <option value="sudeste">Sudeste</option>
-            <option value="sul">Sul</option>
-            <option value="centro-oeste">Centro-Oeste</option>
-          </select>
-        </div>
-
-        <div class="filtro">
-          <label for="estado">Estado:</label>
-          <select id="estado">
-            <option value="21">Maranhão</option>
-            <option value="23">Ceará</option>
-            <option value="15">Pará</option>
-          </select>
-        </div>
-
-        <div class="filtro">
-          <label for="cidade">Cidade:</label>
-          <select id="cidade">
-            <option value="0">Nenhuma</option>
-            <option value="2111300">São Luís</option>
-            <option value="2304400">Fortaleza</option>
-            <option value="1501402">Belém</option>
-          </select>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DashBoard</title>
+    <link rel="stylesheet" href="dash.css" />
+  </head>
+  <body>
+    <header class="cabecalho-principal">
+      <div class="container-navegacao">
+        <h2>Educação Brasil</h2>
+        <nav class="navegacao-principal">
+          <a href="#" class="link-navegacao">Início</a>
+          <button id="botao-dash-acesso">DashBoard</button>
+        </nav>
       </div>
 
-      <!-- Área onde o IDEB será exibido -->
-      <div id="resultado-ideb" style="margin-top: 20px; font-size: 2rem; font-weight: bold;">
-      </div>
-
-      <h3 class="detalhes-gerais-titulo">Detalhes Gerais (Brasil)</h3>
-      <div class="indicadores-grid">
-        <div class="indicador">
-          <strong class="indicador-valor valor-azul">4.3%</strong>
-          <p class="indicador-descricao">Nota IDEB Brasil</p>
-        </div>
-        <div class="indicador">
-          <strong class="indicador-valor valor-vermelho">17.8%</strong>
-          <p class="indicador-descricao">Taxa de Evasão Escolar</p>
-        </div>
-        <div class="indicador">
-          <strong class="indicador-valor valor-verde">20.5%</strong>
-          <p class="indicador-descricao">Escolas com Quadra</p>
-        </div>
-        <div class="indicador">
-          <strong class="indicador-valor valor-verde">80.4%</strong>
-          <p class="indicador-descricao">Escolas com Banheiro</p>
-        </div>
-        <div class="indicador">
-          <strong class="indicador-valor valor-verde">62.4%</strong>
-          <p class="indicador-descricao">Escolas com Acesso à Internet</p>
-        </div>
-        <div class="indicador">
-          <strong class="indicador-valor valor-verde">35.1%</strong>
-          <p class="indicador-descricao">Escolas com Biblioteca</p>
-        </div>
-        <div class="indicador">
-          <strong class="indicador-valor valor-verde">10.9%</strong>
-          <p class="indicador-descricao">Escolas com Lab. de Informática</p>
+      <div class="container">
+        <div class="secao-principal">
+          <h1>Dashboard Educacional</h1>
+          <p>Explore os principais indicadores da educação básica do Brasil</p>
         </div>
       </div>
+    </header>
 
-      <div class="graficos-grid">
-        <div class="grafico-container">
-          <h4 class="grafico-titulo">Taxa de Evasão Escolar por Região (%)</h4>
-          <img src="placeholder_evasao.png" alt="Gráfico Taxa de Evasão" class="grafico-imagem" />
+    <section class="secao-sobre-projeto">
+      <div class="detalhes-gerais-container">
+        <div class="filtros-container">
+          <div class="filtro">
+            <label for="ano">Ano</label>
+            <select id="ano">
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+            </select>
+          </div>
+
+          <div class="filtro">
+            <label for="regiao">Região</label>
+            <select id="regiao">
+              <option value="norte">Norte</option>
+              <option value="nordeste">Nordeste</option>
+              <option value="sudeste">Sudeste</option>
+              <option value="sul">Sul</option>
+              <option value="centro-oeste">Centro-Oeste</option>
+            </select>
+          </div>
+
+          <div class="filtro">
+            <label for="estado">Estado</label>
+            <select id="estado">
+              <option value="21">Maranhão</option>
+              <option value="23">Ceará</option>
+              <option value="15">Pará</option>
+            </select>
+          </div>
+
+          <div class="filtro">
+            <label for="cidade">Cidade</label>
+            <select id="cidade">
+              <option value="0">Nenhuma</option>
+              <option value="2111300">São Luís</option>
+              <option value="2304400">Fortaleza</option>
+              <option value="1501402">Belém</option>
+            </select>
+          </div>
         </div>
-        <div class="grafico-container">
-          <h4 class="grafico-titulo">Acesso à Internet nas Escolas por Região (%)</h4>
-          <img src="placeholder_internet.png" alt="Gráfico Acesso à Internet" class="grafico-imagem" />
+
+        <h3 class="detalhes-gerais-titulo">Detalhes Gerais (Brasil)</h3>
+        <div class="indicadores-grid">
+          <div class="indicador">
+            <strong id="ideb-brasil" class="indicador-valor valor-azul"
+              >--</strong
+            >
+            <p id="descricao-ideb" class="indicador-descricao">
+              Nota IDEB Brasil
+            </p>
+          </div>
+          <div class="indicador">
+            <strong class="indicador-valor valor-vermelho">17.8%</strong>
+            <p class="indicador-descricao">Taxa de Evasão Escolar</p>
+          </div>
+          <div class="indicador">
+            <strong class="indicador-valor valor-amarelo">20.5%</strong>
+            <p class="indicador-descricao">Escolas com Quadra</p>
+          </div>
+          <div class="indicador">
+            <strong class="indicador-valor valor-laranja">80.4%</strong>
+            <p class="indicador-descricao">Escolas com Banheiro</p>
+          </div>
+        </div>
+        <div class="indicadores-grid-2">
+          <div class="indicador">
+            <strong class="indicador-valor valor-azul-claro">62.4%</strong>
+            <p class="indicador-descricao">Escolas com Acesso à Internet</p>
+          </div>
+          <div class="indicador">
+            <strong class="indicador-valor valor-verde-fraco">35.1%</strong>
+            <p class="indicador-descricao">Escolas com Biblioteca</p>
+          </div>
+          <div class="indicador">
+            <strong class="indicador-valor valor-azul-forte">10.9%</strong>
+            <p class="indicador-descricao">Escolas com Lab. de Informática</p>
+          </div>
+        </div>
+
+        <div class="graficos-grid">
+          <div class="grafico-container">
+            <h4 class="grafico-titulo">
+              Taxa de Evasão Escolar por Região (%)
+            </h4>
+            <img
+              src="placeholder_evasao.png"
+              alt="Gráfico Taxa de Evasão"
+              class="grafico-imagem" />
+          </div>
+          <div class="grafico-container">
+            <h4 class="grafico-titulo">
+              Acesso à Internet nas Escolas por Região (%)
+            </h4>
+            <img
+              src="placeholder_internet.png"
+              alt="Gráfico Acesso à Internet"
+              class="grafico-imagem" />
+          </div>
+        </div>
+
+        <p class="fonte-dados">
+          Dados reais retirados das seguintes fontes: INEP, IBGE e MEC
+        </p>
+      </div>
+    </section>
+
+    <footer class="rodape-principal">
+      <div class="conteudo-rodape">
+        <div class="marca-rodape">
+          <h3>Educação Brasil</h3>
+          <p>2025 Educação Brasil. Todos os direitos reservados.</p>
+        </div>
+
+        <div class="links-rodape">
+          <div class="coluna-links-rodape">
+            <h3 class="titulo-links-rodape">Links</h3>
+            <ul class="lista-links-rodape">
+              <li class="item-lista-links-rodape">
+                <a href="#" class="link-rodape">Início</a>
+              </li>
+              <li class="item-lista-links-rodape">
+                <a href="#" class="link-rodape">Dashboard</a>
+              </li>
+            </ul>
+          </div>
+          <div class="coluna-links-rodape">
+            <h3 class="titulo-links-rodape">Contato</h3>
+            <ul class="lista-links-rodape">
+              <li class="item-lista-links-rodape">
+                <a href="mailto:email@gmail.com" class="link-rodape"
+                  >email@gmail.com</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
+    </footer>
 
-      <p class="fonte-dados">
-        Dados reais retirados das seguintes fontes: INEP, IBGE e MEC
-      </p>
-    </div>
-  </section>
-
-  <footer class="rodape-principal">
-    <div class="conteudo-rodape">
-      <div class="marca-rodape">
-        <h3>Educação Brasil</h3>
-        <p>2025 Educação Brasil. Todos os direitos reservados.</p>
-      </div>
-
-      <div class="links-rodape">
-        <div class="coluna-links-rodape">
-          <h3 class="titulo-links-rodape">Links</h3>
-          <ul class="lista-links-rodape">
-            <li class="item-lista-links-rodape">
-              <a href="#" class="link-rodape">Início</a>
-            </li>
-            <li class="item-lista-links-rodape">
-              <a href="#" class="link-rodape">Dashboard</a>
-            </li>
-          </ul>
-        </div>
-        <div class="coluna-links-rodape">
-          <h3 class="titulo-links-rodape">Contato</h3>
-          <ul class="lista-links-rodape">
-            <li class="item-lista-links-rodape">
-              <a href="mailto:email@gmail.com" class="link-rodape">email@gmail.com</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="./dashboard.js"></script>
-</body>
+    <script src="./dashboard.js"></script>
+  </body>
 </html>
