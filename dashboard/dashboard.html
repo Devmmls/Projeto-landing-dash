@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DashBoard</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="./styles/dash.css" />
   </head>
   <body>
@@ -32,42 +32,35 @@
             <select id="ano">
               <option value="2021">2021</option>
               <option value="2020">2020</option>
-              <option value="2019">2019</option>
+              <option value="2019" selected>2019</option>
             </select>
           </div>
-
           <div class="filtro">
             <label for="regiao">Região</label>
             <select id="regiao">
-              <option value="norte">Norte</option>
-              <option value="nordeste">Nordeste</option>
-              <option value="sudeste">Sudeste</option>
-              <option value="sul">Sul</option>
-              <option value="centro-oeste">Centro-Oeste</option>
+              <option value="0">Brasil</option>
+              <option value="1">Norte</option>
+              <option value="2">Nordeste</option>
+              <option value="3">Sudeste</option>
+              <option value="4">Sul</option>
+              <option value="5">Centro-Oeste</option>
             </select>
           </div>
-
           <div class="filtro">
             <label for="estado">Estado</label>
             <select id="estado">
-              <option value="21">Maranhão</option>
-              <option value="23">Ceará</option>
-              <option value="15">Pará</option>
+              <option value="0">Todos</option>
             </select>
           </div>
-
           <div class="filtro">
             <label for="cidade">Cidade</label>
             <select id="cidade">
-              <option value="0">Nenhuma</option>
-              <option value="2111300">São Luís</option>
-              <option value="2304400">Fortaleza</option>
-              <option value="1501402">Belém</option>
+              <option value="0">Todas</option>
             </select>
           </div>
         </div>
 
-        <h3 class="detalhes-gerais-titulo">Detalhes Gerais (Brasil)</h3>
+        <h3 class="detalhes-gerais-titulo">Detalhes Gerais</h3>
         <div class="indicadores-grid">
           <div class="indicador">
             <strong id="ideb-brasil" class="indicador-valor valor-azul"
@@ -78,29 +71,54 @@
             </p>
           </div>
           <div class="indicador">
-            <strong class="indicador-valor valor-vermelho">17.8%</strong>
+            <strong id="ideb-valor" class="indicador-valor valor-verde"
+              >--</strong
+            >
+            <p class="indicador-descricao">Nota IDEB Selecionado</p>
+          </div>
+
+          <div class="indicador">
+            <strong class="indicador-valor valor-vermelho" id="taxa-evasao"
+              >--</strong
+            >
             <p class="indicador-descricao">Taxa de Evasão Escolar</p>
           </div>
           <div class="indicador">
-            <strong class="indicador-valor valor-amarelo">20.5%</strong>
+            <strong class="indicador-valor valor-amarelo" id="escolas-quadra"
+              >--</strong
+            >
             <p class="indicador-descricao">Escolas com Quadra</p>
           </div>
           <div class="indicador">
-            <strong class="indicador-valor valor-laranja">80.4%</strong>
+            <strong class="indicador-valor valor-laranja" id="escolas-banheiro"
+              >--</strong
+            >
             <p class="indicador-descricao">Escolas com Banheiro</p>
           </div>
         </div>
         <div class="indicadores-grid-2">
           <div class="indicador">
-            <strong class="indicador-valor valor-azul-claro">62.4%</strong>
+            <strong
+              class="indicador-valor valor-azul-claro"
+              id="escolas-internet"
+              >--</strong
+            >
             <p class="indicador-descricao">Escolas com Acesso à Internet</p>
           </div>
           <div class="indicador">
-            <strong class="indicador-valor valor-verde-fraco">35.1%</strong>
+            <strong
+              class="indicador-valor valor-verde-fraco"
+              id="escolas-biblioteca"
+              >--</strong
+            >
             <p class="indicador-descricao">Escolas com Biblioteca</p>
           </div>
           <div class="indicador">
-            <strong class="indicador-valor valor-azul-forte">10.9%</strong>
+            <strong
+              class="indicador-valor valor-azul-forte"
+              id="escolas-lab-informatica"
+              >--</strong
+            >
             <p class="indicador-descricao">Escolas com Lab. de Informática</p>
           </div>
         </div>
@@ -110,22 +128,17 @@
             <h4 class="grafico-titulo">
               Taxa de Evasão Escolar por Região (%)
             </h4>
-            <img
-              src="placeholder_evasao.png"
-              alt="Gráfico Taxa de Evasão"
-              class="grafico-imagem" />
+            <canvas id="graficoEvasao"></canvas>
           </div>
           <div class="grafico-container">
             <h4 class="grafico-titulo">
               Acesso à Internet nas Escolas por Região (%)
             </h4>
-            <img
-              src="placeholder_internet.png"
-              alt="Gráfico Acesso à Internet"
-              class="grafico-imagem" />
+            <canvas id="graficoInternet"></canvas>
           </div>
         </div>
-
+      </div>
+      <div class="container">
         <p class="fonte-dados">
           Dados reais retirados das seguintes fontes: INEP, IBGE e MEC
         </p>
@@ -165,8 +178,8 @@
       </div>
     </footer>
 
-    <script src="./scripts/dashboard.js"></script>
-    <script src="./scripts/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./scripts/chart.js"></script>
+    <script src="./scripts/dashboard.js"></script>
   </body>
 </html>
