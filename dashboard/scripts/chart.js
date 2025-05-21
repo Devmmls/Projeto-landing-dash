@@ -1,362 +1,277 @@
-// Variáveis para armazenar as instâncias dos gráficos
 let evasaoChart = null;
 let internetChart = null;
 
-// Função para gerar cores aleatórias (opcional, se quiser usar cores dinâmicas)
-function gerarCorAleatoria() {
-  const r = Math.floor(Math.random() * 255);
-  const g = Math.floor(Math.random() * 255);
-  const b = Math.floor(Math.random() * 255);
-  return `rgba(${r},${g},${b},0.8)`;
+function displayChartMessage(ctx, message, isError = false) {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.font = "14px Arial";
+  ctx.fillStyle = isError ? "red" : "blue";
+  ctx.textAlign = "center";
+  ctx.fillText(message, ctx.canvas.width / 2, ctx.canvas.height / 2);
 }
 
-// Função para obter o ID do território selecionado para a API QEdu
-function getTerritoryId(cidadeId, estadoId, regiaoId) {
-  if (cidadeId && cidadeId !== "0") {
+function getTerritoryIdForCenso(cidadeId, estadoId) {
+  if (cidadeId && cidadeId !== "0" && cidadeId !== "Todas") {
     return cidadeId;
   }
-  if (estadoId && estadoId !== "0") {
+  if (estadoId && estadoId !== "0" && estadoId !== "Todos") {
     return estadoId;
   }
-  // Se nenhum estado ou cidade for selecionado, retorna "brasil"
-  return "brasil";
+  return "21";
 }
 
-/**
- * Carrega e renderiza o gráfico de Taxa de Evasão.
- * @param {string} QEDU_API_TOKEN - Sua chave da API QEdu.
- * @param {string} ano - O ano selecionado.
- * @param {string} cidadeId - O ID da cidade selecionada (pode ser "0").
- * @param {string} estadoId - O ID do estado selecionado (pode ser "0").
- * @param {string} regiaoId - O ID da região selecionada (pode ser "0").
- */
-async function carregarDadosEvasao(
-  QEDU_API_TOKEN,
-  ano,
-  cidadeId,
-  estadoId,
-  regiaoId
-) {
-  try {
-    const id = getTerritoryId(cidadeId, estadoId, regiaoId);
-    const urlRendimento = `https://api.qedu.org.br/v1/rendimento?id=${id}&ano=${ano}`;
+function getTerritoryIdForIdeb(cidadeId, estadoId) {
+  if (cidadeId && cidadeId !== "0" && cidadeId !== "Todas") {
+    return cidadeId;
+  }
+  if (estadoId && estadoId !== "0" && estadoId !== "Todos") {
+    return estadoId;
+  }
+  return "BR";
+}
 
-    const response = await fetch(urlRendimento, {
+async function carregarDadosEvasao(QEDU_API_TOKEN, ano, cidadeId, estadoId) {
+  const canvas = document.getElementById("graficoEvasao");
+  const ctx = canvas.getContext("2d");
+
+  if (evasaoChart) {
+    evasaoChart.destroy();
+    evasaoChart = null;
+  }
+  displayChartMessage(ctx, "Carregando dados de evasão...");
+
+  try {
+    const territoryId = getTerritoryIdForIdeb(cidadeId, estadoId);
+    const url = `https://api.qedu.org.br/v1/ideb/aprovacoes?id=${territoryId}&ano=${ano}&ciclo_id=EM`;
+
+    const response = await fetch(url, {
       headers: {
-        Accept: "application/json",
         Authorization: `Bearer ${QEDU_API_TOKEN}`,
+        Accept: "application/json",
       },
     });
 
     if (!response.ok) {
-      console.error(
-        `Erro na API QEdu (Evasão): ${response.status} - ${response.statusText}`
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        `Erro na requisição de evasão da API QEdu: ${response.status} ${
+          response.statusText
+        } - ${errorData.message || "Sem detalhes"}`
       );
-      // Exibe mensagem de erro no gráfico
-      if (evasaoChart) evasaoChart.destroy();
-      const ctx = document.getElementById("graficoEvasao").getContext("2d");
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.font = "14px Arial";
-      ctx.fillStyle = "red";
-      ctx.textAlign = "center";
-      ctx.fillText(
-        "Erro ao carregar dados de evasão.",
-        ctx.canvas.width / 2,
-        ctx.canvas.height / 2
-      );
-      return;
     }
 
     const data = await response.json();
-    const rendimentoData =
-      data.data && data.data.length > 0 ? data.data[0] : null;
 
-    let taxaAbandono = 0;
-    let labelEvasao = "Taxa de Evasão"; // Default label
-
-    // Verifica se os dados necessários estão presentes e se a taxa de abandono não é indefinida
-    if (rendimentoData && rendimentoData.taxa_abandono !== undefined) {
-      taxaAbandono = rendimentoData.taxa_abandono;
-      // Define o label do gráfico baseado nos filtros
-      if (cidadeId !== "0") {
-        labelEvasao = `Evasão em ${
-          document.getElementById("cidade").options[
-            document.getElementById("cidade").selectedIndex
-          ].text
-        }`;
-      } else if (estadoId !== "0") {
-        labelEvasao = `Evasão no ${
-          document.getElementById("estado").options[
-            document.getElementById("estado").selectedIndex
-          ].text
-        }`;
-      } else {
-        labelEvasao = `Evasão no Brasil`;
-      }
-    } else {
-      console.warn(
-        "Dados de taxa de abandono não encontrados para a seleção atual."
-      );
-      if (evasaoChart) evasaoChart.destroy();
-      const ctx = document.getElementById("graficoEvasao").getContext("2d");
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.font = "14px Arial";
-      ctx.fillStyle = "gray";
-      ctx.textAlign = "center";
-      ctx.fillText(
-        "Dados de evasão não disponíveis.",
-        ctx.canvas.width / 2,
-        ctx.canvas.height / 2
+    if (!data || !Array.isArray(data.data)) {
+      displayChartMessage(
+        ctx,
+        "Estrutura de dados de evasão inesperada.",
+        true
       );
       return;
     }
 
-    if (evasaoChart) {
-      evasaoChart.destroy();
+    const dadosEvasaoFiltro = data.data.find(
+      (item) => item.ano === parseInt(ano)
+    );
+
+    let taxaAbandono = 0;
+    if (
+      dadosEvasaoFiltro &&
+      dadosEvasaoFiltro.taxa_aprovacao !== undefined &&
+      dadosEvasaoFiltro.taxa_aprovacao !== null
+    ) {
+      taxaAbandono = 100 - dadosEvasaoFiltro.taxa_aprovacao;
+      if (taxaAbandono < 0) taxaAbandono = 0;
+    } else {
+      displayChartMessage(
+        ctx,
+        "Dados de evasão não disponíveis ou incompletos.",
+        true
+      );
+      return;
     }
 
-    const dataEvasao = {
-      labels: [labelEvasao],
+    const taxaPermanencia = 100 - taxaAbandono;
+
+    const chartData = {
+      labels: ["Taxa de Evasão (%)", "Taxa de Permanência (%)"],
       datasets: [
         {
-          label: "Taxa de Evasão (%)",
-          data: [taxaAbandono],
-          backgroundColor: "rgba(255, 99, 132, 0.7)",
-          borderColor: "rgba(255, 99, 132, 1)",
-          borderWidth: 1,
+          data: [taxaAbandono, taxaPermanencia],
+          backgroundColor: ["#FF6384", "#36A2EB"],
+          hoverBackgroundColor: ["#FF6384", "#36A2EB"],
         },
       ],
     };
 
-    const configEvasao = {
-      type: "bar",
-      data: dataEvasao,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 30, // Ajuste o max conforme a expectativa
-            title: {
-              display: true,
-              text: "Taxa de Evasão (%)",
-            },
-          },
-          x: {
-            display: false,
-          },
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top",
         },
-        plugins: {
-          legend: {
-            display: false,
-          },
-          title: {
-            display: false,
-          },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                return `${context.dataset.label}: ${context.raw.toFixed(1)}%`;
-              },
+        title: {
+          display: false,
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              let label = context.label || "";
+              if (label) {
+                label += ": ";
+              }
+              if (context.raw !== null) {
+                label += context.raw.toFixed(2) + "%";
+              }
+              return label;
             },
           },
         },
       },
     };
 
-    const graficoEvasaoCanvas = document
-      .getElementById("graficoEvasao")
-      .getContext("2d");
-    evasaoChart = new Chart(graficoEvasaoCanvas, configEvasao);
+    evasaoChart = new Chart(ctx, {
+      type: "pie",
+      data: chartData,
+      options: chartOptions,
+    });
   } catch (error) {
     console.error("Erro ao carregar dados de evasão:", error);
-    if (evasaoChart) evasaoChart.destroy();
-    const ctx = document.getElementById("graficoEvasao").getContext("2d");
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.font = "14px Arial";
-    ctx.fillStyle = "red";
-    ctx.textAlign = "center";
-    ctx.fillText(
-      "Erro ao carregar dados de evasão.",
-      ctx.canvas.width / 2,
-      ctx.canvas.height / 2
-    );
+    if (evasaoChart) {
+      evasaoChart.destroy();
+      evasaoChart = null;
+    }
+    displayChartMessage(ctx, "Erro ao carregar dados de evasão.", true);
   }
 }
 
-/**
- * Carrega e renderiza o gráfico de Acesso à Internet.
- * @param {string} QEDU_API_TOKEN - Sua chave da API QEdu.
- * @param {string} ano - O ano selecionado.
- * @param {string} cidadeId - O ID da cidade selecionada (pode ser "0").
- * @param {string} estadoId - O ID do estado selecionado (pode ser "0").
- * @param {string} regiaoId - O ID da região selecionada (pode ser "0").
- */
-async function carregarDadosInternet(
-  QEDU_API_TOKEN,
-  ano,
-  cidadeId,
-  estadoId,
-  regiaoId
-) {
-  try {
-    const id = getTerritoryId(cidadeId, estadoId, regiaoId);
-    const urlCensoTerritorio = `https://api.qedu.org.br/v1/censo/territorio?id=${id}&ano=${ano}`;
+async function carregarDadosInternet(QEDU_API_TOKEN, ano, cidadeId, estadoId) {
+  const canvas = document.getElementById("graficoInternet");
+  const ctx = canvas.getContext("2d");
 
-    const response = await fetch(urlCensoTerritorio, {
+  if (internetChart) {
+    internetChart.destroy();
+    internetChart = null;
+  }
+  displayChartMessage(ctx, "Carregando dados de internet...");
+
+  try {
+    const territoryId = getTerritoryIdForCenso(cidadeId, estadoId);
+    const url = `https://api.qedu.org.br/v1/censo/territorio/${territoryId}/estrutura?ano=${ano}`;
+
+    const response = await fetch(url, {
       headers: {
-        Accept: "application/json",
         Authorization: `Bearer ${QEDU_API_TOKEN}`,
+        Accept: "application/json",
       },
     });
 
     if (!response.ok) {
-      console.error(
-        `Erro na API QEdu (Censo Território - Internet): ${response.status} - ${response.statusText}`
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        `Erro na requisição de internet da API QEdu: ${response.status} ${
+          response.statusText
+        } - ${errorData.message || "Sem detalhes"}`
       );
-      if (internetChart) internetChart.destroy();
-      const ctx = document.getElementById("graficoInternet").getContext("2d");
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.font = "14px Arial";
-      ctx.fillStyle = "red";
-      ctx.textAlign = "center";
-      ctx.fillText(
-        "Erro ao carregar dados de internet.",
-        ctx.canvas.width / 2,
-        ctx.canvas.height / 2
-      );
-      return;
     }
 
     const data = await response.json();
-    const censoData = data.data && data.data.length > 0 ? data.data[0] : null;
 
-    let percentagemInternet = 0;
-    let labelInternet = "Acesso à Internet nas Escolas";
-
-    // Verifica se os dados necessários estão presentes e se não são indefinidos
-    if (
-      censoData &&
-      censoData.qtd_escolas !== undefined &&
-      censoData.internet_computador_alunos !== undefined
-    ) {
-      const totalEscolas = censoData.qtd_escolas;
-      const escolasComInternet = censoData.internet_computador_alunos;
-
-      if (totalEscolas > 0) {
-        percentagemInternet = (
-          (escolasComInternet / totalEscolas) *
-          100
-        ).toFixed(1);
-      } else {
-        percentagemInternet = 0;
-      }
-
-      // Define o label do gráfico baseado nos filtros
-      if (cidadeId !== "0") {
-        labelInternet = `Internet em ${
-          document.getElementById("cidade").options[
-            document.getElementById("cidade").selectedIndex
-          ].text
-        }`;
-      } else if (estadoId !== "0") {
-        labelInternet = `Internet no ${
-          document.getElementById("estado").options[
-            document.getElementById("estado").selectedIndex
-          ].text
-        }`;
-      } else {
-        labelInternet = `Internet no Brasil`;
-      }
-    } else {
-      console.warn(
-        "Dados de internet (qtd_escolas ou internet_computador_alunos) não encontrados para a seleção atual."
-      );
-      if (internetChart) internetChart.destroy();
-      const ctx = document.getElementById("graficoInternet").getContext("2d");
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.font = "14px Arial";
-      ctx.fillStyle = "gray";
-      ctx.textAlign = "center";
-      ctx.fillText(
-        "Dados de internet não disponíveis.",
-        ctx.canvas.width / 2,
-        ctx.canvas.height / 2
+    if (!data || !Array.isArray(data.data)) {
+      displayChartMessage(
+        ctx,
+        "Estrutura de dados de internet inesperada.",
+        true
       );
       return;
     }
 
-    if (internetChart) {
-      internetChart.destroy();
+    const dadosFiltro = data.data.find((item) => item.ano === parseInt(ano));
+
+    if (
+      !dadosFiltro ||
+      dadosFiltro.qtd_escolas === undefined ||
+      dadosFiltro.qtd_escolas === null ||
+      dadosFiltro.tecnologia_internet === undefined ||
+      dadosFiltro.tecnologia_internet === null
+    ) {
+      displayChartMessage(
+        ctx,
+        "Dados de internet não disponíveis ou incompletos.",
+        true
+      );
+      return;
     }
 
-    const dataInternet = {
-      labels: [labelInternet],
+    const escolasComInternet = dadosFiltro.tecnologia_internet;
+    const totalEscolas = dadosFiltro.qtd_escolas;
+
+    let percentualComInternet = 0;
+    let percentualSemInternet = 100;
+
+    if (totalEscolas > 0) {
+      percentualComInternet = (escolasComInternet / totalEscolas) * 100;
+      percentualSemInternet = 100 - percentualComInternet;
+    }
+
+    const chartData = {
+      labels: ["Escolas com Internet", "Escolas sem Internet"],
       datasets: [
         {
-          label: "Escolas com Internet (%)",
-          data: [percentagemInternet],
-          backgroundColor: "rgba(75, 192, 192, 0.7)",
-          borderColor: "rgba(75, 192, 192, 1)",
+          label: "Percentual",
+          data: [percentualComInternet, percentualSemInternet],
+          backgroundColor: ["#4CAF50", "#FFC107"],
+          borderColor: ["#4CAF50", "#FFC107"],
           borderWidth: 1,
         },
       ],
     };
 
-    const configInternet = {
-      type: "bar",
-      data: dataInternet,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            title: {
-              display: true,
-              text: "Percentual de Escolas (%)",
-            },
-          },
-          x: {
-            display: false,
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          title: {
+            display: true,
+            text: "Percentual de Escolas (%)",
           },
         },
-        plugins: {
-          legend: {
-            display: false,
-          },
-          title: {
-            display: false,
-          },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                return `${context.dataset.label}: ${context.raw}%`;
-              },
+        x: {
+          display: false,
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+        title: {
+          display: false,
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              return `${context.dataset.label}: ${context.raw.toFixed(2)}%`;
             },
           },
         },
       },
     };
 
-    const graficoInternetCanvas = document
-      .getElementById("graficoInternet")
-      .getContext("2d");
-    internetChart = new Chart(graficoInternetCanvas, configInternet);
+    internetChart = new Chart(ctx, {
+      type: "bar",
+      data: chartData,
+      options: chartOptions,
+    });
   } catch (error) {
     console.error("Erro ao carregar dados de internet:", error);
-    if (internetChart) internetChart.destroy();
-    const ctx = document.getElementById("graficoInternet").getContext("2d");
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.font = "14px Arial";
-    ctx.fillStyle = "red";
-    ctx.textAlign = "center";
-    ctx.fillText(
-      "Erro ao carregar dados de internet.",
-      ctx.canvas.width / 2,
-      ctx.canvas.height / 2
-    );
+    if (internetChart) {
+      internetChart.destroy();
+      internetChart = null;
+    }
+    displayChartMessage(ctx, "Erro ao carregar dados de internet.", true);
   }
 }
