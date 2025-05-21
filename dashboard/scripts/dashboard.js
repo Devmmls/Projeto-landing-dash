@@ -22,12 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     "escolas-lab-informatica"
   );
 
-  // Sua chave de API do QEdu. **Substitua PELA SUA CHAVE REAL.**
-  // CUIDADO: Em produção, essa chave deveria ser carregada de forma mais segura,
-  // por exemplo, através de um backend ou variáveis de ambiente.
-  const QEDU_API_TOKEN = "iYnB1spKXMnwYCN7wPZ4KoQjeqGuzHRQTiEHL8ej";
+  const QEDU_API_TOKEN = "f87d48b2-7341-4ff5-8288-34fe287989e9";
 
-  // Variável para armazenar dados do censo, carregados de dadosbrutos.json
   let dadosCensoMaranhao2019 = null;
 
   // Carrega os dados de infraestrutura do arquivo JSON local (dadosbrutos.json)
@@ -54,7 +50,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Popula o dropdown de estados usando a API do IBGE
   async function popularEstados() {
     try {
       const response = await fetch(
@@ -70,14 +65,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         option.textContent = estado.nome;
         estadoSelect.appendChild(option);
       });
-      // Define Maranhão (ID 21) como selecionado por padrão para coincidir com dadosbrutos.json
+
       estadoSelect.value = "21";
     } catch (error) {
       console.error("Erro ao popular estados:", error);
     }
   }
 
-  // Popula o dropdown de cidades com base no ID do estado selecionado
   async function popularCidades(estadoId) {
     cidadeSelect.innerHTML = '<option value="0">Todas</option>';
     if (estadoId === "0") {
@@ -111,10 +105,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const estado = estadoSelect.value;
     const regiao = regiaoSelect.value;
 
-    let id = "brasil"; // ID padrão para a API QEdu se nenhum filtro específico for selecionado
-    let descricaoLocal = "Nota IDEB Selecionado"; // Descrição padrão para o indicador local
+    let id = "brasil";
+    let descricaoLocal = "Nota IDEB Selecionado";
 
-    // A ordem de prioridade dos filtros é importante: Cidade > Estado > Região/Brasil
     if (cidade !== "0") {
       id = cidade;
       descricaoLocal = `Nota IDEB ${
@@ -126,16 +119,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         estadoSelect.options[estadoSelect.selectedIndex].text
       }`;
     } else if (regiao !== "0") {
-      // Para o IDEB Local, se apenas uma região for selecionada,
-      // e não um estado ou cidade dentro dela, não podemos obter um IDEB específico da QEdu
-      // Então, exibimos "--" para o IDEB Local.
       if (idebSpan) idebSpan.textContent = "--";
       if (descricaoIdebLocal)
         descricaoIdebLocal.textContent = "Nota IDEB Região (Não disponível)";
       return;
     } else {
-      // Se "Brasil" for selecionado nos filtros de Região, Estado e Cidade,
-      // o IDEB "local" pode mostrar "--" para não duplicar o IDEB Brasil.
       if (idebSpan) idebSpan.textContent = "--";
       if (descricaoIdebLocal)
         descricaoIdebLocal.textContent = "Nota IDEB Selecionado";
@@ -179,7 +167,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Busca e exibe o IDEB do Brasil (separado, pois sempre é Brasil)
   async function buscarIdebBrasil(ano) {
     const urlQeduBrasil = `https://api.qedu.org.br/v1/ideb?id=brasil&ano=${ano}`;
 
@@ -227,7 +214,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.warn(
         "Dados do Censo Maranhão 2019 não disponíveis para exibir métricas de infraestrutura."
       );
-      taxaEvasaoSpan.textContent = "--"; // Taxa de evasão ainda é mockada
+      taxaEvasaoSpan.textContent = "--";
       escolasQuadraSpan.textContent = "--";
       escolasBanheiroSpan.textContent = "--";
       escolasInternetSpan.textContent = "--";
@@ -262,13 +249,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       dadosCensoMaranhao2019.dependencias_lab_informatica
     );
 
-    // Função auxiliar para calcular percentual e garantir que valores nulos sejam 0
     const calcPercent = (count) =>
       totalEscolas > 0
         ? (((count || 0) / totalEscolas) * 100).toFixed(1) + "%"
         : "--";
 
-    // Taxa de evasão: valor mockado, pois não está em dadosbrutos.json para este indicador
+    // Taxa de evasão: valor mockado
     taxaEvasaoSpan.textContent = "17.8%";
 
     escolasQuadraSpan.textContent = calcPercent(
@@ -290,9 +276,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Função principal para iniciar o dashboard
   async function inicializarDashboard() {
-    await carregarDadosCensoLocal(); // Carrega o JSON local (Maranhão 2019)
-    await popularEstados(); // Popula os estados (Maranhão por padrão)
-    await popularCidades(estadoSelect.value); // Popula cidades para Maranhão
+    await carregarDadosCensoLocal();
+    await popularEstados();
+    await popularCidades(estadoSelect.value);
 
     // Buscar e exibir o IDEB Brasil
     await buscarIdebBrasil(anoSelect.value);
@@ -304,7 +290,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     exibirMetricasInfraestrutura();
 
     // Chama funções de chart.js para carregar gráficos iniciais
-    // Certifique-se de que as funções existam em chart.js antes de chamá-las
+
     if (typeof carregarDadosEvasao === "function") {
       await carregarDadosEvasao(
         QEDU_API_TOKEN,
