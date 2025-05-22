@@ -431,7 +431,6 @@ body {
    Responsividade para dispositivos móveis
    ========================================= */
 @media (max-width: 768px) {
-
   .cabecalho-principal .container {
     flex-direction: column;
     align-items: center;
@@ -481,7 +480,7 @@ body {
 
   .secao-destaques {
     max-width: 90%;
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
     padding: 20px 10px;
     margin-bottom: 3rem;
   }
@@ -558,7 +557,7 @@ body {
 /* Responsividade para celulares pequenos (até 480px) */
 @media (max-width: 480px) {
   html {
-    font-size: 50%; 
+    font-size: 50%;
   }
 
   .cabecalho-principal .container {
@@ -575,7 +574,7 @@ body {
     line-height: 2rem;
   }
 
-  .botao, 
+  .botao,
   .botao-primario,
   .botao-secundario,
   .botao-acao {
@@ -622,11 +621,11 @@ body {
 
 @media (max-width: 768px) {
   .secao-sobre-projeto {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 2rem;
-}
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+  }
 
   .secao-sobre-projeto .conteudo-sobre-projeto {
     max-width: 100%;
@@ -659,6 +658,3 @@ body {
     align-self: center;
   }
 }
-
-
-
